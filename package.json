@@ -1,0 +1,22 @@
+{
+  "name": "ls",
+  "version": "1.0.0",
+  "description": "js tools",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/acronHou/jstools.git"
+  },
+  "keywords": [
+    "小工具"
+  ],
+  "author": "jser",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/acronHou/jstools/issues"
+  },
+  "homepage": "https://github.com/acronHou/jstools#readme"
+}
