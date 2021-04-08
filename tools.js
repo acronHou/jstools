@@ -1,7 +1,7 @@
 
 
 // 对象转url参数
-objToQuery = function (obj) {
+ function objToQuery(obj) {
     let arr = [];
     for (let k in obj) {
         let str = k + '=' + obj[k];
