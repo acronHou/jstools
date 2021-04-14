@@ -1,2 +1,2 @@
 # jstools
-js tools 
+js tools for npm
