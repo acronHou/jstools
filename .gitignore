@@ -21,3 +21,6 @@ yarn-error.log*
 *.sw*
 /index.html
 /webpack.config.js
+/coverage/
+/jest.config.js
+/yarn.lock
