@@ -126,10 +126,16 @@ const addYear = function (years, time) {
 /**
  * 增加天数
  * @param [days=0] {number} 指定天数
+ * @param [time] {number|string} 指定天数
  * @returns {string}
  */
-const addDay = function (days = 0) {
-    let date = new Date();
+const addDay = function (days = 0, time) {
+    let date;
+    if (!time) {
+        date = new Date()
+    } else {
+        date = new Date(time)
+    }
     let year, month, day;
     date.setTime(date.getTime() + days * 24 * 60 * 60 * 1000);
     year = date.getFullYear();

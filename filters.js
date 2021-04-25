@@ -1,9 +1,10 @@
 /**
- * 每隔4位加一个空格
- * @param num
- * @returns {string|string}
+ * 每固定位数加空格
+ * @param value {string} 目标字符串
+ * @param spaceLength {number} 间隔长度
+ * @returns {string}
  */
-function stringFormatSpace(value,spaceLength) {
+function stringFormatSpace(value, spaceLength) {
     let result = '';
     let num1 = value
     while (num1.length > spaceLength) {
@@ -15,7 +16,139 @@ function stringFormatSpace(value,spaceLength) {
     }
     return result
 }
-module.exports = {
-    stringFormatSpace
+
+/**
+ * 千分位加逗号，并保留两位小数
+ * @param num  数字
+ * @returns {string}
+ */
+function toThousands(num) {
+    if (num === undefined) return ''
+    if (num === '0' || num === 0) return '0'
+    let result = '';
+    num = Number(num.toString() || 0).toFixed(2);
+    let numAry = num.toString().split(".");
+    let preNum = numAry[0];
+    let lastNum = numAry[1];
+    while (preNum.length > 3) {
+        result = ',' + preNum.slice(-3) + result;
+        preNum = preNum.slice(0, preNum.length - 3);
+    }
+    if (preNum) {
+        result = preNum + result;
+    }
+    result = result + "." + lastNum;
+    return result;
 }
 
+/**
+ *中间内容变星号
+ * @param v {string} 目标字符串
+ * @param start {number} 开始位置
+ * @param number 变星号数目
+ * @returns {string}
+ */
+function hideContent(v, start, number) {
+    if (!v) return ''
+    let result = "";
+    // 1字符串转化成数组
+    let phoneArr = [...v];
+    start--
+    // 2.将数组中的指定位变成*
+    phoneArr.forEach((res, index) => {
+        if (index >= start && index < start + number) {
+            result += '*';
+        } else {
+            result += res;
+        }
+    });
+    return result
+}
+
+/**
+ *格式化时间
+ * @param time {string} 时间
+ * @param format {string} 格式化字符串 eg. YYYY-MM-DD hh:mm:ss
+ * @returns {string}
+ */
+function formatDate(time, format) {
+    const now = new Date().getTime()
+    if (!time) time = now
+
+    // while (time.toString().length < 13) time += '0'
+
+    const date = new Date(time.toString().replace(/\-/g, "/").replace(/T/g, " ").split('.')[0])
+    date.getMonth()
+    /** 参数集 年-月-日 时:分:秒 */
+    const arg = {
+        year: date.getFullYear(),
+        month: date.getMonth() + 1,
+        day: date.getDate(),
+        hours: date.getHours() < 10 ? '0' + date.getHours() : date.getHours(),
+        minutes: date.getMinutes() < 10 ? '0' + date.getMinutes() : date.getMinutes(),
+        seconds: date.getSeconds() < 10 ? '0' + date.getSeconds() : date.getSeconds(),
+    }
+
+    /** 判断有没有指定的时间格式 */
+    switch (format) {
+        case 'YYYY-MM-DD hh:mm:ss':
+            return `${arg.year}-${arg.month}-${arg.day} ${arg.hours}:${arg.minutes}:${arg.seconds}`
+        case 'YYYY-MM-DD':
+            return `${arg.year}-${arg.month}-${arg.day}`
+        case 'MM-DD':
+            return `${arg.month}-${arg.day}`
+        case 'hh:mm:ss':
+            return `${arg.hours}:${arg.minutes}:${arg.seconds}`
+        case 'hh:mm':
+            return `${arg.hours}:${arg.minutes}`
+        case 'ymd':
+            return `${arg.year}年${arg.month}月${arg.day}日`
+        case 'ymdsfm':
+            return `${arg.year}年${arg.month}月${arg.day}日${arg.hours}:${arg.minutes}`
+        default :
+            return `${arg.year}-${arg.month}-${arg.day}`
+    }
+}
+
+/**
+ * 展示最后n为
+ * @param val 传入值
+ * @param n {number} 位数
+ * @returns {string}
+ */
+function lastN(val, n) {
+    let result = '';
+    if (val) {
+        result = val.substring(val.length - n)
+    } else {
+        result = ""
+    }
+    return result
+}
+
+// 星期转换
+function weekFilter(enWeek) {
+    let week = {
+        Monday: '星期一',
+        Tuesday: '星期二',
+        Wednesday: '星期三',
+        Thursday: '星期四',
+        Friday: '星期五',
+        Saturday: '星期六',
+        Sunday: '星期日',
+    }
+    if (!Object.keys(week).includes(enWeek)) {
+        console.warn('输入的英文星期有误，eg：Monday')
+        return
+    }
+    return week[enWeek]
+}
+
+module.exports = {
+    stringFormatSpace,
+    toThousands,
+    hideContent,
+    formatDate,
+    lastN,
+    weekFilter
+}
