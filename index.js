@@ -1,14 +1,14 @@
 
-var tools = require('./tools')
-var regex = require('./regex')
-var filters = require('./filters')
-var idadtTools=  {
+var tools = require('./tools.js')
+var regex = require('./regex.js')
+var filters = require('./filters.js')
+var idadtTools= {
     ...tools,
     ...regex,
     ...filters
 }
 module.exports = {
-    idadtTools 
+    idadtTools
 }
 
 
