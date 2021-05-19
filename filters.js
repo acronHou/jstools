@@ -28,8 +28,9 @@ function dataMask(data, startLen, endLen) {
         maskLen = dataLen - sLen - eLen;
         let arr = new Array(maskLen);
         arr.fill('*');
-        // let sStr = data.splice(0, sLen);
-        // let eStr = data.sp
+        let sStr = data.substr(0, sLen);
+        let eStr = data.substr(dataLen - eLen, eLen);
+        return `${sStr}${arr.join('')}${eStr}`
     }
 }
 
@@ -46,6 +47,7 @@ function stringFormatSpace(value, spaceLength) {
     return result
 }
 
-// module.exports = {
-//     stringFormatSpace
-// }
+module.exports = {
+    dataMask,
+    stringFormatSpace
+}
