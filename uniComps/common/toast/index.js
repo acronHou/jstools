@@ -1,27 +1,29 @@
-import Vue from 'vue';
-
-export default {
-    install: function (Vue) {
+var toast = {
+    install: function(Vue) {
         Vue.prototype.hktoast = this.toastModal;
     },
-    toastModal: (props) => {
-        let config = {
+    toastModal: function(props) {
+        var config = {
             str: '',
             duration: 2500,
-            success: function(){}
+            success: function() {}
+        };
+        if (typeof (props) === 'string') {
+            config.str = props ? props : '';
+        } else if (typeof (props) === 'object') {
+            config = props ? props : config;
         }
-        if(typeof(props)==='string'){
-            config.str = props?props:''
-        }else if(typeof(props)==='object'){
-            config = props?props:config
-        }
-        setTimeout(() => {
+        setTimeout(function() {
             uni.showToast({
                 title: config.str,
                 icon: 'none',
                 duration: config.duration,
                 success: config.success
             });
-        }, 10)
+        }, 10);
     },
-}  
+}
+
+module.exports = {
+    toast
+}
