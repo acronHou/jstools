@@ -24,6 +24,4 @@ var toast = {
     },
 }
 
-module.exports = {
-    toast
-}
+module.exports = toast

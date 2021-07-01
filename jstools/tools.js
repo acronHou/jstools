@@ -22,7 +22,7 @@ function objToQuery(obj, flag) {
  * @return {String} 生成的随机数结果
  */
 function randomString(len) {
-    const strLength;
+    let strLength;
     if (len && typeof len === 'number') {
         strLength = len;
     } else {
