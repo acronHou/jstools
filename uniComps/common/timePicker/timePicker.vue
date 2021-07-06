@@ -23,7 +23,7 @@
 <script>
     import {
         uniPopup
-    } from "@dcloudio/uni-ui"
+    } from "@dcloudio/uni-ui";
     export default {
         components: {
             uniPopup
